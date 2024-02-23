@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using testeSmark.WebApi.Interfaces.Applications;
+using testeSmark.WebApi.ViewModels.Request;
 
 namespace testeSmark.WebApi.Controllers.v1
 {
@@ -19,9 +20,11 @@ namespace testeSmark.WebApi.Controllers.v1
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] string identificadorEmpresa)
+        public IActionResult Post([FromBody] PayloadCadastro payload)
         {
-            return Ok(_protocoloService.GerarProtocolo(identificadorEmpresa));
+            _logger.LogInformation($"Iniciando processo de geração de protocolo para empresa: {payload.IdentificadorEmpresa}", payload.IdentificadorEmpresa);
+            var teste = _protocoloService.GerarProtocolo(payload.IdentificadorEmpresa);
+            return Ok(new { resultado = teste });
         }
     }
 }

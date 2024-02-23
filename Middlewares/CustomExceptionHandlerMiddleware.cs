@@ -24,8 +24,8 @@ namespace testeSmark.WebApi.Middlewares
             {
                 _logger.LogError($"Ocorreu um erro ao processar a solicitação: {ex}");
 
-                var traceId = Guid.NewGuid().ToString();
-                var statusCode = (int)HttpStatusCode.InternalServerError;
+                string traceId = Guid.NewGuid().ToString();
+                int statusCode = (int)HttpStatusCode.InternalServerError;
 
                 context.Response.StatusCode = statusCode;
                 context.Response.ContentType = "application/json";
